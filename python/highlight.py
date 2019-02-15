@@ -36,7 +36,7 @@ def modifier_cb(data, modifier, modifier_data, string):
     print("data: %s" % data)
     print("modifier: %s" % modifier)
     print("modifier_data: %s" % modifier_data)
-    return "%s XXXXXXX %s" % (string, modifier_data)
+    return "%s XXXXX %s" % (string, modifier_data)
 
 
 if __name__ == "__main__":
@@ -48,5 +48,5 @@ if __name__ == "__main__":
     weechat.buffer_set(buffer, "localvar_set_no_log", "1")
 
     # Temp, just to test
-    # weechat.hook_signal("*,irc_in2_join", "join_cb", "")
-    weechat.hook_modifier("irc_in_privmsg", "modifier_cb", "")
+    weechat.hook_signal("*,irc_in2_join", "join_cb", "")
+    # weechat.hook_modifier("irc_in_privmsg", "modifier_cb", "")
