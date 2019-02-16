@@ -26,7 +26,10 @@ def join_cb(data, signal, signal_data):
     buffer = weechat.buffer_search("python", "Highlight")
     # print("In join_cb: %s " % msg)
     if buffer:
-        weechat.prnt(buffer, "%s (%s) has joined this channel?" % (msg["nick"], msg["host"]))
+        output = weechat.color("chat_prefix_buffer") + str(weechat.buffer_get_integer(buffer, 'number')) + weechat.color("reset") + "\t%s (%s) has joined this channel?" % (msg["nick"], msg["channel"])
+        weechat.prnt(buffer, output)  # "%s (%s) has joined this channel?" % (msg["nick"], msg["channel"]))
+        # weechat.prnt_date_tags(buffer, 0, "", output)  # Throws down a datestamp
+        weechat.buffer_set(buffer, "hotlist", "3")  # Sets the color of the bufferlist channel to magenta
     return weechat.WEECHAT_RC_OK
 
 
