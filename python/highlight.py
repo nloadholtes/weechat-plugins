@@ -23,8 +23,8 @@ def join_cb(data, signal, signal_data):
     # signal_data is IRC message, for example: ":nick!user@host JOIN :#channel"
     server = signal.split(",")[0]
     msg = weechat.info_get_hashtable("irc_message_parse", {"message": signal_data})
-    buffer = weechat.info_get("irc_buffer", "%s,%s" % (server, "#Highlight"))
-    print("In join_cb: %s " % msg)
+    buffer = weechat.buffer_search("python", "Highlight")
+    # print("In join_cb: %s " % msg)
     if buffer:
         weechat.prnt(buffer, "%s (%s) has joined this channel?" % (msg["nick"], msg["host"]))
     return weechat.WEECHAT_RC_OK
