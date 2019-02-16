@@ -23,7 +23,7 @@ def join_cb(data, signal, signal_data):
     # signal_data is IRC message, for example: ":nick!user@host JOIN :#channel"
     server = signal.split(",")[0]
     msg = weechat.info_get_hashtable("irc_message_parse", {"message": signal_data})
-    buffer = weechat.info_get("irc_buffer", "%s,%s" % (server, msg["channel"]))
+    buffer = weechat.info_get("irc_buffer", "%s,%s" % (server, "#Highlight"))
     print("In join_cb: %s " % msg)
     if buffer:
         weechat.prnt(buffer, "%s (%s) has joined this channel?" % (msg["nick"], msg["host"]))
@@ -36,7 +36,7 @@ def modifier_cb(data, modifier, modifier_data, string):
     print("data: %s" % data)
     print("modifier: %s" % modifier)
     print("modifier_data: %s" % modifier_data)
-    return "%s XXXXX %s" % (string, modifier_data)
+    return "%s" % string
 
 
 if __name__ == "__main__":
@@ -49,4 +49,4 @@ if __name__ == "__main__":
 
     # Temp, just to test
     weechat.hook_signal("*,irc_in2_join", "join_cb", "")
-    # weechat.hook_modifier("irc_in_privmsg", "modifier_cb", "")
+    weechat.hook_modifier("irc_in_privmsg", "modifier_cb", "")
