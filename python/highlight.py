@@ -36,9 +36,9 @@ def join_cb(data, signal, signal_data):
 def modifier_cb(data, modifier, modifier_data, string):
     # add server name to all messages received
     # (OK that's not very useful, but that's just an example!)
-    print("data: %s" % data)
-    print("modifier: %s" % modifier)
-    print("modifier_data: %s" % modifier_data)
+    # print("data: %s" % data)  # Blank?
+    # print("modifier: %s" % modifier)  # irc_in_PRIBMSG
+    # print("modifier_data: %s" % modifier_data)  # znc
     return "%s" % string
 
 
