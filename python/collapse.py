@@ -1,3 +1,4 @@
+import re
 try:
     import weechat
 except ImportError:
@@ -11,12 +12,11 @@ def collapse_end():
 
 
 def collapse_cb(data, modifier, modifier_data, string):
-    # msg = weechat.info_get_hashtable("irc_message_parse", {"message": signal_data})
-    
-    chunked_msg = string.split()  # TODO: get the right field
+    msg = weechat.info_get_hashtable("irc_message_parse", {"message": signal_data})
+    chunked_msg = re.split("\(|\)", msg)
     where = chunked_msg[1]
-    what = chunked_msg[5]
-    who = chunked_msg[-1]
+    what = chunked_msg[3]
+    who = chunked_msg[4]
     return "%s -- %s -- %s" % (where, what, who)
     
 
