@@ -19,7 +19,7 @@ def buffer_close_cb(data, buffer):
 
 
 def gh_watch_cb(data, bufferp, date, tags, disp, high, prefix, msg):
-    if prefix != "]":
+    if "github\x1c :]" not in prefix:
         return weechat.WEECHAT_RC_OK
     
     buffer = weechat.buffer_search("python", "GithubWatcher")
@@ -30,7 +30,7 @@ def gh_watch_cb(data, bufferp, date, tags, disp, high, prefix, msg):
         print("tags: %s " % tags)
         print("disp: %s " % disp)
         print("high: %s " % high)
-        print("prefix: %s" % prefix)
+        print("prefix: '%r'" % prefix)
         weechat.prnt(buffer, msg)
         # weechat.prnt_date_tags(buffer, 0, "", output)  # Throws down a datestamp
         weechat.buffer_set(buffer, "hotlist", "3")  # Sets the color of the bufferlist channel to magenta
