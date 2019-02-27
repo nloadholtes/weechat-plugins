@@ -1,3 +1,4 @@
+import re
 try:
     import weechat
 except ImportError:
@@ -21,18 +22,27 @@ def buffer_close_cb(data, buffer):
 def gh_watch_cb(data, bufferp, date, tags, disp, high, prefix, msg):
     if "github\x1c :]" not in prefix:
         return weechat.WEECHAT_RC_OK
-    
+    if msg.startswith("[ http"):
+        return weechat.WEECHAT_RC_OK
     buffer = weechat.buffer_search("python", "GithubWatcher")
-    # print("In join_cb: %s " % msg)
     if buffer:
-        # output = "%s (%s) has joined this channel?" % (msg["nick"], msg["channel"])
-        # prefix:  'github :]'
-        print("tags: %s " % tags)
-        print("disp: %s " % disp)
-        print("high: %s " % high)
-        print("prefix: '%r'" % prefix)
-        weechat.prnt(buffer, msg)
-        # weechat.prnt_date_tags(buffer, 0, "", output)  # Throws down a datestamp
+        # print("tags: %s " % tags)
+        # print("disp: %s " % disp)
+        # print("high: %s " % high)
+        # print("prefix: '%r'" % prefix)
+        if msg[0] == "[":
+            chunked_msg = re.split("")
+        if msg.startswith("https://github"):
+            chunked_msg = re.split("\(|\)", msg)
+            if len(chunked_msg)<3:
+                print("wrong message type: %s" % chunked_msg)
+                return weechat.WEECHAT_RC_OK
+            where = chunked_msg[1]
+            what = chunked_msg[3]
+            who = chunked_msg[4]
+            weechat.prnt(buffer, "%s -- %s -- %s" % (where, what, who))
+        else:
+            weechat.prnt(buffer, msg)
         weechat.buffer_set(buffer, "hotlist", "3")  # Sets the color of the bufferlist channel to magenta
     return weechat.WEECHAT_RC_OK
 
