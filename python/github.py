@@ -31,7 +31,7 @@ def gh_watch_cb(data, bufferp, date, tags, disp, high, prefix, msg):
         # print("high: %s " % high)
         # print("prefix: '%r'" % prefix)
         if msg[0] == "[":
-            chunked_msg = msg.split("")
+            # chunked_msg = msg.split(" ")
             print("unhandled msg:%s" % msg)
         if msg.startswith("https://github"):
             chunked_msg = re.split("\(|\)", msg)
