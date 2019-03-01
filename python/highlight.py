@@ -51,5 +51,5 @@ if __name__ == "__main__":
     weechat.buffer_set(buffer, "localvar_set_no_log", "1")
 
     # Temp, just to test
-    weechat.hook_signal("*,irc_in2_join", "join_cb", "")
+    # weechat.hook_signal("*,irc_in2_join", "join_cb", "")
     weechat.hook_modifier("irc_in_privmsg", "modifier_cb", "")
