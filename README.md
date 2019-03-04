@@ -9,3 +9,6 @@ A highlighter were I can pass in strings I want to be alerted on
 
 ## Silent
 Playing around with the idea of scilencing certain accounts (noisy bots)
+
+## Github
+The default messages that github prints out are messy. What if we could condense those messages?
